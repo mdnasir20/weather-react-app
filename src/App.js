@@ -1,19 +1,14 @@
 import React, {useState} from "react";
 
-
-
-const api = {
-  key: "0dbe6341b8c44e76e8ab065a55fa9570",
-  base: "https://api.openweathermap.org/data/2.5/"
-}
-
-function App() {
+function App() { 
   const [query, setQuery] = useState('');
   const [weather, setWeather] = useState({});
 
+// www.gooole.come/weather=hhhhh
+  //(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
   const search = evt => {
     if (evt.key === "Enter") {
-      fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+      fetch(`${process.env.REACT_APP_API_BASE}/weather?q=${query}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`)
         .then(res => res.json())
         .then(result => {
           setWeather(result);
@@ -35,8 +30,9 @@ function App() {
     return `${day} ${date} ${month} ${year}`
   }
 
+
   return (
-    <div className={(typeof weather.main != "undefined") ? ((weather.main.temp > 16) ? 'app warm' : 'app') : 'app'}>
+    <div className={(typeof weather.main != "undefined") ? ((weather?.main?.temp >= 25) ? "app warm" : "app") ? ((weather?.main?.temp <= 24) ? 'app clear' : 'app') ? ((weather?.main?.temp === 10) ? 'app cloudy' : 'app') : "app"}>
       <main>
         <div className="search-box">
           <input 
