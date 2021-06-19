@@ -1,11 +1,10 @@
-import React, {useState} from "react";
+import React, {useState} from "react"
 
-function App() { 
+function App() {
   const [query, setQuery] = useState('');
   const [weather, setWeather] = useState({});
 
-// www.gooole.come/weather=hhhhh
-  //(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+
   const search = evt => {
     if (evt.key === "Enter") {
       fetch(`${process.env.REACT_APP_API_BASE}/weather?q=${query}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`)
@@ -13,7 +12,7 @@ function App() {
         .then(result => {
           setWeather(result);
           setQuery('');
-          
+
         });
     }
   }
@@ -32,10 +31,24 @@ function App() {
 
 
   return (
-    <div className={(typeof weather.main != "undefined") ? ((weather?.main?.temp >= 25) ? "app warm" : "app") ? ((weather?.main?.temp <= 24) ? 'app clear' : 'app') ? ((weather?.main?.temp === 10) ? 'app cloudy' : 'app') : "app"}>
+    <div
+      className={
+      typeof weather.main != "undefined"
+        ? weather?.weather[0]?.main === "Clear"
+          ? "app warm"
+          : weather?.weather[0]?.main === "Haze"
+          ? "app autumn"
+          : weather?.weather[0]?.main === "Rain"
+          ? "app rain"
+          : weather?.weather[0]?.main === "Clouds"
+          ? "app cloud"
+          : "app"
+        : "app"
+    }
+  >
       <main>
         <div className="search-box">
-          <input 
+          <input
             type="text"
             className="search-bar"
             placeholder="Search..."

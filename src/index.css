@@ -24,7 +24,7 @@
   background-image: url("./Image/cloudy.jpg");
 }
 .app.rain {
-  background-image: url("./Image/.jpg");
+  background-image: url("./Image/rain.jpg");
 }
 
 .app.clear {
@@ -38,7 +38,6 @@ main {
   min-height: 100vh;
   padding: 25px;
 }
-
 .search-box {
   width: 100%;
   display: flex;
@@ -46,6 +45,7 @@ main {
   align-items: center;
   display: flex;
   margin-top:  20px;
+
 }
 
 .search-box .search-bar {
